@@ -1,0 +1,11 @@
+{
+  "name": "timeline-proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:pds-2018s1/timeline-proxy",
+  "author": "grupo2",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo no tests for this project"
+  }
+}
