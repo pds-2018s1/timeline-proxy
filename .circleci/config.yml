@@ -35,3 +35,27 @@ jobs:
 
 
       - run: npm install
+
+      - setup_remote_docker:
+
+          docker_layer_caching: true
+
+
+
+      - run: docker build -t g2pdes/timeline-proxy:latest .
+
+      - run: docker tag g2pdes/timeline-proxy:latest registry.heroku.com/$HEROKU_APP_NAME_PROXY/web
+
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      - run: docker push g2pdes/timeline-proxy:latest
+
+      - run: docker login -u $HEROKU_USERNAME -p $HEROKU_PASSWORD registry.heroku.com
+
+      - run: docker push registry.heroku.com/$HEROKU_APP_NAME_PROXY/web
+
+  
+
+      - run: wget -qO- https://toolbelt.heroku.com/install.sh | sh    
+
+      - run: heroku container:release web --app $HEROKU_APP_NAME_PROXY
